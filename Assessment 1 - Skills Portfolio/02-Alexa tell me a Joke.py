@@ -83,12 +83,6 @@ class GoogleAssistant:
                                     command=self.get_random_joke)
         self.next_button.grid(row=1, column=0, padx=5, pady=5)
         
-        
-        self.quit_button = tk.Button(button_frame, text="Quit", 
-                                    font=("Arial", 12),
-                                    bg="lightcoral",
-                                    command=self.quit_application)
-        self.quit_button.grid(row=1, column=1, padx=5, pady=5)
     
     def get_random_joke(self):
         """Get a random joke from the list and display the setup"""
