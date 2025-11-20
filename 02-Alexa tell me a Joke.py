@@ -6,38 +6,23 @@ class GoogleAssistant:
     def __init__(self, root):
         self.root = root
         self.root.title("Alexa")
-        self.root.geometry("500x300")
-        self.root.resizable(True, True)
-        
+        self.root.geometry("500x300")        
         
         self.jokes = self.load_jokes()
-        
-        
+                
         self.current_setup = ""
         self.current_punchline = ""
         
-        
         self.create_widgets()
-        
         
         self.get_random_joke()
     
-    def load_jokes(self):
-        """Load jokes from the randomJokes.txt file"""
-        try:
-            with open("resources/randomJokes.txt", "r", encoding="utf-8") as file:
-                jokes = [line.strip() for line in file if line.strip()]
-            return jokes
-        except FileNotFoundError:
+    def joke(self):
+        with open('randomJokes.txt','r') as file:
+            jokes = file.read
+            print(jokes)
 
-            default_jokes = [
-                "Why did the chicken cross the road?To get to the other side.",
-                "What happens if you boil a clown?You get a laughing stock."
-            ]
-            return default_jokes
-    
     def create_widgets(self):
-        """Create and arrange all GUI widgets"""
         
         title_label = tk.Label(self.root, text="Alexa", 
                               font=("Arial", 16, "bold"), fg="blue")
@@ -85,7 +70,6 @@ class GoogleAssistant:
         
     
     def get_random_joke(self):
-        """Get a random joke from the list and display the setup"""
         if not self.jokes:
             messagebox.showerror("Error", "No jokes available!")
             return
@@ -111,13 +95,11 @@ class GoogleAssistant:
         self.punchline_button.config(state="normal")
     
     def show_punchline(self):
-        """Display the punchline of the current joke"""
         self.punchline_label.config(text=self.current_punchline)
         
         self.punchline_button.config(state="disabled")
     
     def quit_application(self):
-        """Close the application"""
         if messagebox.askokcancel("Quit", "Do you want to quit the application?"):
             self.root.destroy()
 
