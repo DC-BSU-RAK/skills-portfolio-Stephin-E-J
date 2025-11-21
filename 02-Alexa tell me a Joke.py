@@ -3,40 +3,34 @@ from tkinter import messagebox
 import random
 
 class GoogleAssistant:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Alexa")
-        self.root.geometry("500x300")        
+    def __init__(self, alexa):
+        self.alexa = alexa
+        self.alexa.title("Alexa")
+        self.alexa.geometry("500x300")        
         
-        self.jokes = self.load_jokes()
+        self.jokes = self.random_joke()
                 
-        self.current_setup = ""
-        self.current_punchline = ""
-        
+    
         self.create_widgets()
         
-        self.get_random_joke()
     
-    def joke(self):
+    def random_joke(self):
         with open('randomJokes.txt','r') as file:
-            jokes = file.read
-            print(jokes)
+            jokes = file.readlines()
+        return [joke.strip() for joke in jokes if joke.strip()]
 
     def create_widgets(self):
         
-        title_label = tk.Label(self.root, text="Alexa", 
-                              font=("Arial", 16, "bold"), fg="blue")
+        title_label = tk.Label(self.alexa, text="Alexa")
         title_label.pack(pady=10)
         
         
-        self.setup_label = tk.Label(self.root, text="", 
-                                   font=("Arial", 12), 
-                                   wraplength=450, 
-                                   justify="center")
+        self.setup_label = tk.Label(self.alexa, text="", font=("Arial", 12), 
+                                    justify="center")
         self.setup_label.pack(pady=10)
         
         
-        self.punchline_label = tk.Label(self.root, text="", 
+        self.punchline_label = tk.Label(self.alexa, text="", 
                                        font=("Arial", 12, "italic"), 
                                        fg="darkgreen",
                                        wraplength=450, 
@@ -44,7 +38,7 @@ class GoogleAssistant:
         self.punchline_label.pack(pady=10)
         
         
-        button_frame = tk.Frame(self.root)
+        button_frame = tk.Frame(self.alexa)
         button_frame.pack(pady=20)
         
         
@@ -98,15 +92,11 @@ class GoogleAssistant:
         self.punchline_label.config(text=self.current_punchline)
         
         self.punchline_button.config(state="disabled")
-    
-    def quit_application(self):
-        if messagebox.askokcancel("Quit", "Do you want to quit the application?"):
-            self.root.destroy()
 
 def main():
-    root = tk.Tk()
-    app = GoogleAssistant(root)
-    root.mainloop()
+    alexa = tk.Tk()
+    app = GoogleAssistant(alexa)
+    alexa.mainloop()
 
 if __name__ == "__main__":
     main()
