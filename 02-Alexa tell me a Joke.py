@@ -18,20 +18,20 @@ class GoogleAssistant:
     def buttons(self):
         
         title_label = tk.Label(self.alexa, text="Alexa", font=("Arial",25))
-        title_label.grid(row=0, column=0, columnspan=2, pady=10, sticky="ew")
+        title_label.grid(row=0, column=0, columnspan=3, pady=10)
 
         
         self.text_joke = tk.Label(self.alexa, text="", font=("Arial", 12), 
                                     justify="center")
-        self.text_joke.grid(row=1, column=0, columnspan=2, pady=10, sticky="ew")
+        self.text_joke.grid(row=1, column=0, columnspan=3, pady=10 )
         
         
         self.punchline = tk.Label(self.alexa, text="", 
                                        font=("italic", 12), fg= "green",justify="center")
-        self.punchline.grid(row=2, column=0, columnspan=2, pady=10, sticky="ew")
+        self.punchline.grid(row=2, column=0, columnspan=3, pady=10)
         
         button_frame = tk.Frame(self.alexa)
-        button_frame.grid(row=3, column=0, columnspan=2, pady=20)
+        button_frame.grid(row=3, column=0, columnspan=3, pady=20)
         
         self.joke_button = tk.Button(button_frame, text="Alexa tell me a Joke", font=("Arial", 12, "bold"),
                                     bg="maroon", command=self.get_random_joke)
@@ -47,11 +47,11 @@ class GoogleAssistant:
         self.next_joke = tk.Button(button_frame, text="Next Joke", font=("Arial", 12),
                                     bg="lightyellow",
                                     command=self.get_random_joke)
-        self.next_joke.grid(row=1, column=0, padx=5, pady=5)
+        self.next_joke.grid(row=0, column=2, padx=5, pady=5)
 
         self.quit = tk.Button(button_frame, text="Quit", font=("Arial", 12),
                               bg="red", command=self.quit_tab)
-        self.quit.grid(row=1, column=1, padx=5, pady=5)
+        self.quit.grid(row=0, column=3, padx=5, pady=5)
         
     
     def get_random_joke(self):
