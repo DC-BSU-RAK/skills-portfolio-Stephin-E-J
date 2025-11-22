@@ -10,8 +10,6 @@ class GoogleAssistant:
         self.jokes = self.random_joke()
         self.buttons()
     
-        
-    
     def random_joke(self):
         with open('randomJokes.txt','r') as file:
             jokes = file.readlines()
@@ -20,20 +18,20 @@ class GoogleAssistant:
     def buttons(self):
         
         title_label = tk.Label(self.alexa, text="Alexa", font=("Arial",25))
-        title_label.pack(pady=10)
+        title_label.grid(row=0, column=0, columnspan=2, pady=10, sticky="ew")
 
         
         self.text_joke = tk.Label(self.alexa, text="", font=("Arial", 12), 
                                     justify="center")
-        self.text_joke.pack(pady=10)
+        self.text_joke.grid(row=1, column=0, columnspan=2, pady=10, sticky="ew")
         
         
         self.punchline = tk.Label(self.alexa, text="", 
                                        font=("italic", 12), fg= "green",justify="center")
-        self.punchline.pack(pady=10)
+        self.punchline.grid(row=2, column=0, columnspan=2, pady=10, sticky="ew")
         
         button_frame = tk.Frame(self.alexa)
-        button_frame.pack(pady=20)
+        button_frame.grid(row=3, column=0, columnspan=2, pady=20)
         
         self.joke_button = tk.Button(button_frame, text="Alexa tell me a Joke", font=("Arial", 12, "bold"),
                                     bg="maroon", command=self.get_random_joke)
@@ -74,7 +72,6 @@ class GoogleAssistant:
         
         self.text_joke.config(text=self.current_setup)
         self.punchline.config(text="")
-        
         
         self.punchline_button.config(state="normal")
     
