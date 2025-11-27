@@ -1,12 +1,13 @@
 from tkinter import *
 import tkinter as tk
 import random
+from PIL import Image, ImageTk
 
 class MathsQuizProject:
     def __init__(self, quiz):
         self.quiz = quiz
         self.quiz.title("Math's Quiz")
-        self.quiz.geometry("500x500")
+        self.quiz.geometry("800x600")
 
         self.difficulty = None
         self.score = 0
@@ -18,28 +19,33 @@ class MathsQuizProject:
 
         self.front_menu()
 
-    def clear_screen(self):
+    def screen(self):
         for widget in self.quiz.winfo_children():
             widget.destroy()
 
     def main_menu(self):
         main = tk.Button(self.quiz, text="Main Menu", font=('Arial', 10),
-                         command=self.front_menu, bg="red", width=8)
+                         command=self.front_menu, bg="blue", width=8)
         main.place(x=10,y=10)
+        
 
     def front_menu(self):
-        self.clear_screen()
+        self.screen()
+        img = Image.open("Homepg.png")
+        img = img.resize((800, 600))  
+        self.bg = ImageTk.PhotoImage(img)
+        tk.Label(self.quiz, image=self.bg).place(x=0, y=0)
 
         tk.Label(self.quiz, text="Maths Quiz", font=('Arial', 35)).pack(pady=20)
         
         tk.Button(self.quiz, text="Easy", font=('Arial', 20),
-                  command=lambda: self.start_button("easy"), width=15).pack(pady=10)
+                  command=lambda: self.start("easy"), width=15).pack(pady=10)
         tk.Button(self.quiz, text="Moderate", font=('Arial', 20),
-                  command=lambda: self.start_button("moderate"), width=15).pack(pady=10)
+                  command=lambda: self.start("moderate"), width=15).pack(pady=10)
         tk.Button(self.quiz, text="Advanced", font=('Arial', 20),
-                  command=lambda: self.start_button("advanced"), width=15).pack(pady=10)
+                  command=lambda: self.start("advanced"), width=15).pack(pady=10)
 
-    def start_button(self, difficulty):
+    def start(self, difficulty):
         self.difficulty = difficulty
         self.score = 0
         self.question_count = 0
@@ -57,8 +63,15 @@ class MathsQuizProject:
         return random.choice(['+','-'])
     
     def next_question(self):
-        self.clear_screen()
+        self.screen()
+
+        img = Image.open("Homepg.png")
+        img = img.resize((800, 600))  
+        self.bg = ImageTk.PhotoImage(img)
+        tk.Label(self.quiz, image=self.bg).place(x=0, y=0)
+
         self.main_menu()
+
 
         tk.Label(self.quiz, text=f"Score: {self.score}", font=('Arial', 16)).pack(pady=5)
         tk.Label(self.quiz, text=f"Question {self.question_count + 1}/10", font=('Arial', 14)).pack()
@@ -104,10 +117,16 @@ class MathsQuizProject:
             self.show_result()
 
     def show_result(self):
-        self.clear_screen()
+        self.screen()
         self.main_menu()
 
-        grade = self.calculate_grade()
+        img = Image.open("Homepg.png")
+        img = img.resize((800, 600))  
+        self.bg = ImageTk.PhotoImage(img)
+        tk.Label(self.quiz, image=self.bg).place(x=0, y=0)
+
+
+        grade = self.calculating()
 
         tk.Label(self.quiz, text="Completed Quiz!", 
                 font=('Arial', 26, 'bold')).pack(pady=30)
@@ -120,7 +139,7 @@ class MathsQuizProject:
         tk.Button(self.quiz, text="Play Again", font=('Arial', 18), 
                  command=self.front_menu, width=12).pack(pady=20)
 
-    def calculate_grade(self):
+    def calculating(self):
         if self.score >= 90:
             return "A+"
         elif self.score >= 80:
